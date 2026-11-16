@@ -1,0 +1,37 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y cmake build-essential gcc-14 g++-14
+    
+      - name: Install Conan
+        run: pipx install conan
+      - name: Conan detect profile
+        run: conan profile detect
+      - name: Conan install dependencies
+        env:
+          CC: gcc-14
+          CXX: g++-14
+        run: conan install . --build=missing -s compiler.version=14 -s compiler.cppstd=23
+      - name: Conan build
+        env:
+          CC: gcc-14
+          CXX: g++-14
+        run: conan build . -o "&:tests=True"
+
+      - name: Run tests
+        run: ctest --test-dir build/Release --output-on-failure
