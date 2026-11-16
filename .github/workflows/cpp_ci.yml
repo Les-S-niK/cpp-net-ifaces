@@ -31,7 +31,9 @@ jobs:
         env:
           CC: gcc-14
           CXX: g++-14
-        run: conan build . -o "&:tests=True"
-
+        run: |
+          conan build . -o "&:tests=True" \
+          -s compiler.version=14 \
+          -s compiler.cppstd=23
       - name: Run tests
         run: ctest --test-dir build/Release --output-on-failure
