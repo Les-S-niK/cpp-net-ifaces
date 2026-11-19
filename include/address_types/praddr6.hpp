@@ -7,7 +7,7 @@
 #include "number_usings.hpp"
 class PrAddr6 {
    public:
-    static constexpr u8 size = 6;
+    static constexpr u8 size = 16;
     using praddr6_t = std::array<u8, size>;
 
     constexpr explicit PrAddr6(praddr6_t praddr6);
