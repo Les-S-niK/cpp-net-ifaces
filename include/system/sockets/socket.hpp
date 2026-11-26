@@ -3,6 +3,7 @@
 #define INCLUDE_SOCKETS_SOCKET_HPP_
 
 #include <concepts>
+#include <expected>
 
 #include "number_usings.hpp"
 
@@ -13,6 +14,7 @@ enum class SocketErrors : u8 { CanNotCreate };
 
 template <typename Sock>
 concept Socket = requires(Sock sock) {
+    { sock.create() } -> std::same_as<std::expected<Sock, SocketErrors>>;
     { sock.getFd() } -> std::same_as<fd_t>;
 };
 
