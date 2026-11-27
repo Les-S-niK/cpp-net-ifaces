@@ -20,7 +20,7 @@ TEST(TestPrAddr4Type, checkToStringReturnsCorrectRepresentation) {
 }
 
 TEST(TestPrAddr4Type, checkToStringReturnsCorrectRepresentationAllZeros) {
-    PrAddr4::praddr4_t arr{0, 0, 0, 0};
+    PrAddr4::praddr4_t arr{};
     PrAddr4 addr{arr};
 
     ASSERT_EQ("0.0.0.0", addr.toString());

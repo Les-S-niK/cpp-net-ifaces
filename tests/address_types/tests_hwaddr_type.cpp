@@ -20,7 +20,7 @@ TEST(TestHwAddrType, checkToStringReturnsCorrectRepresentation) {
 }
 
 TEST(TestHwAddrType, checkToStringReturnsCorrectRepresentationAllZeros) {
-    HwAddr::hwaddr_t arr{0x0, 0x0, 0x0, 0x0, 0x0, 0x0};
+    HwAddr::hwaddr_t arr{};
     HwAddr addr{arr};
 
     ASSERT_EQ("00:00:00:00:00:00", addr.toString());
