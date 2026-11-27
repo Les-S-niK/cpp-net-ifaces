@@ -16,7 +16,8 @@ if(TESTS)
   add_executable(
     CppNetIfacesTests
     ./src/system/sockets/linux_sockets.cpp
-    ./tests/tests_system_linux_sockets.cpp ./src/address_types/hwaddr.cpp)
+    ./tests/system/sockets/tests_linux_sockets.cpp
+    ./src/address_types/hwaddr.cpp ./tests/address_types/tests_hwaddr_type.cpp)
 
   target_include_directories(CppNetIfacesTests PUBLIC ./include/)
 
