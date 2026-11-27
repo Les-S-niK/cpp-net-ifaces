@@ -17,7 +17,9 @@ if(TESTS)
     CppNetIfacesTests
     ./src/system/sockets/linux_sockets.cpp
     ./tests/system/sockets/tests_linux_sockets.cpp
-    ./src/address_types/hwaddr.cpp ./tests/address_types/tests_hwaddr_type.cpp)
+    ./src/address_types/hwaddr.cpp
+    ./tests/address_types/tests_hwaddr_type.cpp
+    ./src/address_types/praddr4.cpp)
 
   target_include_directories(CppNetIfacesTests PUBLIC ./include/)
 
