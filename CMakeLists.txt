@@ -19,7 +19,10 @@ if(TESTS)
     ./tests/system/sockets/tests_linux_sockets.cpp
     ./src/address_types/hwaddr.cpp
     ./tests/address_types/tests_hwaddr_type.cpp
-    ./src/address_types/praddr4.cpp)
+    ./src/address_types/praddr4.cpp
+    ./tests/address_types/tests_praddr4_type.cpp
+    ./src/address_types/praddr6.cpp
+    ./tests/address_types/tests_praddr6_type.cpp)
 
   target_include_directories(CppNetIfacesTests PUBLIC ./include/)
 
