@@ -14,14 +14,16 @@ class LinuxSocket4 {
     LinuxSocket4(LinuxSocket4&& other) noexcept;
     auto operator=(const LinuxSocket4&) -> LinuxSocket4& = delete;
     auto operator=(LinuxSocket4&&) -> LinuxSocket4& = delete;
-    ~LinuxSocket4() = default;
+    ~LinuxSocket4();
 
     [[nodiscard]] auto static create() noexcept
         -> std::expected<LinuxSocket4, SocketErrors>;
     [[nodiscard]] auto getFd() const noexcept -> fd_t;
 
    private:
-    fd_t _fd;
+    fd_t _fd{};
+
+    explicit LinuxSocket4(fd_t sock4_fd) noexcept;
 };
 
 class LinuxSocket6 {
@@ -37,7 +39,9 @@ class LinuxSocket6 {
     [[nodiscard]] auto getFd() const noexcept -> fd_t;
 
    private:
-    fd_t _fd;
+    fd_t _fd{};
+
+    explicit LinuxSocket6(fd_t sock6_fd) noexcept;
 };
 
 static_assert(Socket<LinuxSocket4>,
