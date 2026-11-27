@@ -11,8 +11,8 @@ class HwAddr {
     static constexpr u8 size = 6;
     using hwaddr_t = std::array<u8, size>;
 
-    constexpr explicit HwAddr(hwaddr_t hwaddr);
-    [[nodiscard]] constexpr auto get() const noexcept -> hwaddr_t;
+    explicit HwAddr(hwaddr_t hwaddr) noexcept;
+    [[nodiscard]] auto get() const noexcept -> hwaddr_t;
     [[nodiscard]] auto toString() const noexcept -> std::string;
 
    private:

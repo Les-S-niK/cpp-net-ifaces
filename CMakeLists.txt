@@ -13,8 +13,10 @@ if(TESTS)
   enable_testing()
   include(GoogleTest)
 
-  add_executable(CppNetIfacesTests ./src/system/sockets/linux_sockets.cpp
-                                   ./tests/tests_system_linux_sockets.cpp)
+  add_executable(
+    CppNetIfacesTests
+    ./src/system/sockets/linux_sockets.cpp
+    ./tests/tests_system_linux_sockets.cpp ./src/address_types/hwaddr.cpp)
 
   target_include_directories(CppNetIfacesTests PUBLIC ./include/)
 
@@ -26,9 +28,14 @@ else()
   add_executable(${PROJECT_NAME} src/main.cpp)
 
   add_library(Sockets ./src/system/sockets/linux_sockets.cpp)
+  add_library(
+    AddressTypes ./src/address_types/hwaddr.cpp ./src/address_types/praddr4.cpp
+                 ./src/address_types/praddr6.cpp)
 
-  target_include_directories(${PROJECT_NAME} PUBLIC include/)
   target_include_directories(Sockets PUBLIC include/)
+  target_include_directories(AddressTypes PUBLIC include/)
+  target_include_directories(${PROJECT_NAME} PUBLIC include/)
 
   target_link_libraries(${PROJECT_NAME} PRIVATE Sockets)
+  target_link_libraries(${PROJECT_NAME} PRIVATE AddressTypes)
 endif()
