@@ -13,15 +13,22 @@ if(TESTS)
   enable_testing()
   include(GoogleTest)
 
-  add_executable(ExampleTests ./tests/tests_example.cpp)
+  add_executable(CppNetIfacesTests ./src/system/sockets/linux_sockets.cpp
+                                   ./tests/tests_system_linux_sockets.cpp)
 
-  target_include_directories(ExampleTests PUBLIC ./include/)
+  target_include_directories(CppNetIfacesTests PUBLIC ./include/)
 
-  target_link_libraries(ExampleTests PRIVATE GTest::gtest GTest::gtest_main)
+  target_link_libraries(CppNetIfacesTests PRIVATE GTest::gtest
+                                                  GTest::gtest_main)
 
-  add_test(NAME ExampleTests COMMAND ExampleTests)
+  add_test(NAME CppNetIfacesTests COMMAND CppNetIfacesTests)
 else()
   add_executable(${PROJECT_NAME} src/main.cpp)
 
+  add_library(Sockets ./src/system/sockets/linux_sockets.cpp)
+
   target_include_directories(${PROJECT_NAME} PUBLIC include/)
+  target_include_directories(Sockets PUBLIC include/)
+
+  target_link_libraries(${PROJECT_NAME} PRIVATE Sockets)
 endif()
